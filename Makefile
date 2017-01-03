@@ -14,6 +14,7 @@ HETS_VERSION ?= $(shell printf `cat version_nr`)
 
 # We assume ghc 7+
 GHCVERSION := $(shell ghc --numeric-version)
+GHC_PARALLEL_FEATURE := $(shell expr $(shell ghc --numeric-version | cut -d '.' -f 1) \>= 8)
 NO_BIND_WARNING := -fno-warn-unused-do-bind
 HC_WARN := -Wall -fwarn-tabs \
   -fwarn-unrecognised-pragmas -fno-warn-orphans $(NO_BIND_WARNING)
@@ -21,6 +22,9 @@ HC_WARN := -Wall -fwarn-tabs \
 # call resulting binary with a final +RTS -p to get a file <binary>.prof
 #HC_PROF := -prof -auto-all -osuf p_o +RTS -K100m -RTS
 HC_OPTS += $(HC_WARN) $(HC_PROF)
+ifeq "$(GHC_PARALLEL_FEATURE)" "1"
+    HC_OPTS += -j
+endif
 # -ddump-minimal-imports
 # uncomment the above line to generate .imports files for displayDependencyGraph
 
