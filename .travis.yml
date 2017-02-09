@@ -10,6 +10,9 @@ before_install:
 install:
  - sudo apt-get install --no-install-recommends `dpkg-checkbuilddeps debian/control 2>&1 | cut -f3- -d":" | sed -e 's,([^)]*),,g' -e 's,openjdk-.*-jdk,,'` || true
  - sudo apt-get install openjdk-7-jdk
+ - sudo apt-get install cabal-install
+ - cabal update
+ - cabal install --only-dependencies
 script:
  - ghc -V
  - make
