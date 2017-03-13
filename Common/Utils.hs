@@ -463,7 +463,7 @@ writeTempFile :: String -- ^ Content
 writeTempFile str tmpDir file = do
   let (fileDirname, fileBasename) = stripDir file
   let tmpDirJoined = tmpDir ++ "/" ++ fileDirname
-  createDirectory tmpDirJoined
+  createDirectoryIfMissing True tmpDirJoined
   (tmpFile, hdl) <- openTempFileWithDefaultPermissions tmpDirJoined fileBasename
   hPutStr hdl str
   hFlush hdl
