@@ -118,6 +118,7 @@ recursiveS = "recursive"
 interactiveS = "interactive"
 connectS = "connect"
 xmlS = "xml"
+dbS = "db"
 listenS = "listen"
 pidFileS = "pidfile"
 applyAutomaticRuleS = "apply-automatic-rule"
@@ -574,6 +575,7 @@ data OutType =
   | KIFOut
   | OmdocOut
   | XmlOut -- ^ development graph xml output
+  | DbOut -- ^ development graph database output
   | JsonOut -- ^ development graph json output
   | ExperimentalOut -- ^ for testing new functionality
   | HaskellOut
@@ -601,6 +603,7 @@ instance Show OutType where
     KIFOut -> "kif"
     OmdocOut -> omdocS
     XmlOut -> xmlS
+    DbOut -> dbS
     JsonOut -> "json"
     ExperimentalOut -> experimentalS
     HaskellOut -> hsS
@@ -619,7 +622,7 @@ instance Show OutType where
 plainOutTypeList :: [OutType]
 plainOutTypeList =
   [ Prf, EnvOut ] ++ map OWLOut plainOwlFormats ++
-  [ RDFOut, CLIFOut, KIFOut, OmdocOut, XmlOut, JsonOut, ExperimentalOut
+  [ RDFOut, CLIFOut, KIFOut, OmdocOut, XmlOut, DbOut, JsonOut, ExperimentalOut
   , HaskellOut, ThyFile, ComptableXml, MedusaJson, FreeCADOut, SymXml, SymsXml]
 
 outTypeList :: [OutType]
