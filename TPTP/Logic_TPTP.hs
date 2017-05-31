@@ -39,7 +39,6 @@ import Common.DefaultMorphism
 import Common.ProofTree
 import Logic.Logic as Logic
 
-import Data.Monoid
 import qualified Data.Set as Set
 
 data TPTP = TPTP deriving (Show, Ord, Eq)
